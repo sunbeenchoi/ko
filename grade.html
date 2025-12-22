@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>성적조회 (샘플)</title>
+  <style>
+    :root{
+      --bg1:#CFE4E9; --bg2:#BBD9E0; --bg3:#ACD1DA;
+      --ink:#111827;
+      --muted:#6b7280;
+      --blue:#2f5f8f;
+      --blue2:#1f4f7d;
+      --line:rgba(17,24,39,0.18);
+      --panel:rgba(255,255,255,0.92);
+      --shadow:0 16px 40px rgba(0,0,0,0.10);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 55%,var(--bg3) 100%);
+      min-height:100vh;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 0;}
+    /* 상단 헤더(기관 사칭 방지용: 중립 텍스트만) */
+    .top{
+      background:rgba(255,255,255,0.55);
+      border:1px solid rgba(17,24,39,0.10);
+      border-radius:10px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .topbar{height:10px;background:linear-gradient(180deg,var(--blue),var(--blue2));}
+    .top-inner{
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      font-weight:900;
+      letter-spacing:-0.02em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .badge{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(31,79,125,0.25);
+      color:rgba(31,79,125,0.95);
+      background:rgba(255,255,255,0.6);
+      font-weight:800;
+    }
+    .sys-title{
+      font-weight:900;
+      color:rgba(31,79,125,0.95);
+      letter-spacing:-0.02em;
+    }
+
+    /* 메인 패널 */
+    .panel{
+      margin:18px auto 26px;
+      background:var(--panel);
+      border:1px solid rgba(17,24,39,0.14);
+      border-radius:10px;
+      box-shadow:0 10px 26px rgba(0,0,0,0.06);
+      overflow:hidden;
+    }
+    .panel-topbar{height:6px;background:rgba(47,95,143,0.35);}
+    .content{padding:22px 18px 18px;}
+
+    h1{
+      margin:0;
+      font-size:28px;
+      letter-spacing:-0.03em;
+      font-weight:900;
+    }
+    .hr{border:none;border-top:2px solid rgba(17,24,39,0.65);margin:14px 0 18px;}
+
+    /* 표 */
+    .table-wrap{overflow:auto;border:1px solid rgba(17,24,39,0.12);border-radius:8px;background:#fff;}
+    table{border-collapse:collapse;min-width:860px;width:100%;}
+    th,td{
+      padding:10px 12px;
+      border-bottom:1px solid rgba(17,24,39,0.10);
+      border-right:1px solid rgba(17,24,39,0.08);
+      text-align:center;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    th:last-child, td:last-child{border-right:none;}
+    thead th{
+      background:rgba(47,95,143,0.10);
+      color:rgba(17,24,39,0.85);
+      font-weight:900;
+    }
+    .subhead th{
+      background:rgba(47,95,143,0.06);
+      font-weight:900;
+    }
+    .left{ text-align:left; }
+    .muted{ color:rgba(17,24,39,0.55); }
+
+    /* 버튼 */
+    .btn-row{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin-top:14px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      min-width:180px;
+      height:44px;
+      border-radius:10px;
+      border:1px solid rgba(17,24,39,0.10);
+      background:linear-gradient(180deg,#5e86b2,#2f5f8f);
+      color:#fff;
+      font-weight:900;
+      letter-spacing:-0.01em;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(47,95,143,0.20);
+    }
+    .btn:active{transform:translateY(1px);filter:brightness(0.96);}
+
+    .note{
+      margin-top:10px;
+      font-size:12px;
+      color:rgba(17,24,39,0.55);
+      line-height:1.6;
+    }
+
+    /* 푸터 */
+    footer{
+      margin-top:28px;
+      background:#6d7a80;
+      color:rgba(255,255,255,0.92);
+      padding:22px 14px 28px;
+    }
+    footer .inner{max-width:980px;margin:0 auto;text-align:center;line-height:1.7;}
+    footer .link{font-weight:900;margin-bottom:8px;}
+    footer small{display:block;opacity:.9;margin-top:6px;}
+
+    @media (max-width:480px){
+      .top-inner{justify-content:center;text-align:center}
+      .sys-title{font-size:14px}
+      h1{font-size:22px}
+      .btn{min-width:140px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="topbar"></div>
+      <div class="top-inner">
+        <div class="brand">
+          <span>성적조회 시스템</span>
+          <span class="badge">샘플/연습용</span>
+        </div>
+        <div class="sys-title">2026학년도 성적통지표 온라인 제공 시스템 (UI Mock)</div>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="panel-topbar"></div>
+      <div class="content">
+        <h1>성적조회</h1>
+        <hr class="hr"/>
+
+        <!-- 상단 기본정보 표 -->
+        <div class="table-wrap" style="margin-bottom:14px;">
+          <table>
+            <thead>
+              <tr>
+                <th>수험번호</th>
+                <th>성명</th>
+                <th>생년월일</th>
+                <th>성별</th>
+                <th>출신고교(또는 졸업년도)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="muted">26-ABC-1234</td>
+                <td class="muted">홍○○</td>
+                <td class="muted">2007-01-01</td>
+                <td class="muted">남</td>
+                <td class="muted">예시고등학교(2025)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 과목 성적 표 -->
+        <div class="table-wrap">
+          <table>
+            <thead class="subhead">
+              <tr>
+                <th>영역</th>
+                <th>선택과목</th>
+                <th>표준점수</th>
+                <th>백분위</th>
+                <th>등급</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>한국사</td><td>-</td><td>-</td><td>-</td><td>1</td></tr>
+              <tr><td>국어</td><td>화법과 작문</td><td>131</td><td>94</td><td>1</td></tr>
+              <tr><td>수학</td><td>미적분</td><td>126</td><td>88</td><td>2</td></tr>
+              <tr><td>영어</td><td>-</td><td>-</td><td>-</td><td>1</td></tr>
+              <tr><td>탐구</td><td>생활과 윤리</td><td>59</td><td>78</td><td>3</td></tr>
+              <tr><td>탐구</td><td>지구과학Ⅰ</td><td>63</td><td>89</td><td>2</td></tr>
+              <tr><td>제2외국어/한문</td><td>독일어Ⅰ</td><td>-</td><td>-</td><td>2</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">
+          ※ 본 화면은 “UI 목업(샘플)”입니다. 실제 성적을 증명하거나 발급하는 용도로 사용할 수 없습니다.
+        </div>
+
+        <div class="btn-row">
+          <button class="btn" type="button">출력</button>
+          <button class="btn" type="button">종료</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="inner">
+      <div class="link">개인정보처리방침</div>
+      (예시) 주소 | 문의전화 0000-0000 (9시~18시) [단, 12시~13시 제외]
+      <small>Copyright © UI Mock Page. All Rights Reserved.</small>
+    </div>
+  </footer>
+</body>
+</html>
