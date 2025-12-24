@@ -57,12 +57,17 @@
       color:rgba(31,79,125,0.95);
       background:rgba(255,255,255,0.6);
       font-weight:800;
-    }
+        }
     .sys-title{
       font-weight:900;
       color:rgba(31,79,125,0.95);
       letter-spacing:-0.02em;
+      font-size:18px; /* ← 여기서 살짝 키움 (원하는 값으로 16~20px 정도 조절) */
     }
+    .t-year{ color: #6b7280; }   /* 회색 */
+    .t-main{ color: #111827; }   /* 검정 */
+    .t-online{ color: #1f4f7d; } /* 남색 */
+
 
     /* 메인 패널 */
     .panel{
@@ -164,10 +169,12 @@
         <div class="brand">
           <span>성적조회 시스템</span>
           
-        </div>
-        <div class="sys-title">2026학년도 성적통지표 온라인 제공 시스템 </div>
+      <div class="sys-title">
+        <span class="t-year">2026학년도</span>
+        <span class="t-main">대학수학능력시험 성적통지표</span>
+        <span class="t-online">온라인 제공 시스템</span>
       </div>
-    </div>
+
 
     <section class="panel">
       <div class="panel-topbar"></div>
@@ -212,13 +219,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>한국사</td><td>-</td><td>-</td><td>-</td><td>1</td></tr>
-              <tr><td>국어</td><td>화법과 작문</td><td>131</td><td>94</td><td>1</td></tr>
-              <tr><td>수학</td><td>미적분</td><td>126</td><td>88</td><td>2</td></tr>
+              <tr><td>한국사</td><td>-</td><td>-</td><td>-</td><td>3</td></tr>
+              <tr><td>국어</td><td>화법과 작문</td><td>130</td><td>92</td><td>2</td></tr>
+              <tr><td>수학</td><td>미적분</td><td>131</td><td>97</td><td>1</td></tr>
               <tr><td>영어</td><td>-</td><td>-</td><td>-</td><td>1</td></tr>             
-              <tr><td>탐구</td><td>화학Ⅰ</td><td>59</td><td>78</td><td>3</td></tr>
-              <tr><td>탐구</td><td>지구과학Ⅰ</td><td>63</td><td>89</td><td>2</td></tr>
-              <tr><td>제2외국어/한문</td><td>아랍어Ⅰ</td><td>-</td><td>-</td><td>2</td></tr>
+              <tr><td>탐구</td><td>화학Ⅰ</td><td>59</td><td>77</td><td>3</td></tr>
+              <tr><td>탐구</td><td>지구과학Ⅰ</td><td>59</td><td>75</td><td>3</td></tr>
+              <tr><td>제2외국어/한문</td><td>아랍어Ⅰ</td><td>-</td><td>-</td><td>8</td></tr>
             </tbody>
           </table>
         </div>
@@ -242,5 +249,6 @@
   </footer>
 </body>
 </html>
+
 
 
